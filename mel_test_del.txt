@@ -4,7 +4,8 @@ mod  10/20
 lll
 lll
 11:37
-1027 feature-001   NEW   WIP1  WIP2    NEW B002  
+1027 feature-001   NEW   WIP1  WIP2   B001WIP3  <add>    NEW B002  
+B001 WIP4  
 B002 1026  
 B002 1016-1330
 B002 1026-1340  
@@ -14,4 +15,5 @@ B003 1026-1335
 B003 1026-1443  
 (merge)  1450 
 (after merge)  1028 1047
+(second merge with B001)  1028 1102
 
