@@ -1,4 +1,4 @@
-this is test file two
+this is test file two  
 mod  10/20
 
 lll
@@ -6,5 +6,10 @@ lll
 11:37
 1027 feature-001   NEW   WIP1  WIP2    NEW B002  
 B002 1026  
-B002 1016-1330   
-
+B002 1016-1330
+B002 1026-1340  
+B001 1026 1440  
+   
+B003 1026-1335
+B003 1026-1443  
+(merge)  1450 
