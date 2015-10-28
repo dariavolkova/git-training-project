@@ -1,3 +1,4 @@
 NEW FILE TEST
 this is a test
 test
+MY CHANGES to new file
