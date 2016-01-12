@@ -1,0 +1,2 @@
+This is a test FILE in a new directory.
+-CRW
