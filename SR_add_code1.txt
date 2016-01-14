@@ -1,0 +1,7 @@
+-- New File adding to Git Hub Training
+
+Begin
+select * from rv_commercial.ui_cr_revenue_report_details where ui_rr_list_id = 1273212840
+/
+
+End;
