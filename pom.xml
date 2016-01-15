@@ -3,13 +3,13 @@
   <groupId>git-training-project</groupId>
   <artifactId>git-training-project</artifactId>
   <version>1.0</version>
-  
+  -- Added Comment 15-Jan-2016
   <build>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>6.1.0</version>
+        <version>6.2.0</version>
         <configuration>
           <source>1.7</source>
           <target>1.7</target>
