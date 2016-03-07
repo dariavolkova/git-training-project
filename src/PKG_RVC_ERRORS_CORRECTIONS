@@ -9,7 +9,7 @@ CREATE OR REPLACE PACKAGE RV_COMMERCIAL.PKG_RVC_ERRORS_CORRECTIONS AS
    1.0        2/5/2016      fvizcaino       1. Created this package.
 ******************************************************************************/
 
-   PROCEDURE Invalid_claim_type;
+   PROCEDURE Invalid_claim_type ;
    PROCEDURE Invalid_cost_sharing_indicator;
 
 END PKG_RVC_ERRORS_CORRECTIONS;
