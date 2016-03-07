@@ -1,0 +1,465 @@
+CREATE OR REPLACE PACKAGE RV_COMMERCIAL.PKG_RVC_ERRORS_CORRECTIONS AS
+/******************************************************************************
+   NAME:       PKG_RVC_ERRORS_CORRECTIONS
+   PURPOSE:
+
+   REVISIONS:
+   Ver        Date        Author           Description
+   ---------  ----------  ---------------  ------------------------------------
+   1.0        2/5/2016      fvizcaino       1. Created this package.
+******************************************************************************/
+
+   PROCEDURE Invalid_claim_type;
+   PROCEDURE Invalid_cost_sharing_indicator;
+
+END PKG_RVC_ERRORS_CORRECTIONS;
+/
+CREATE OR REPLACE PACKAGE BODY RV_COMMERCIAL.PKG_RVC_ERRORS_CORRECTIONS
+AS
+   PROCEDURE Invalid_claim_type  IS
+      v_msg           VARCHAR2 (2000) := NULL;
+      err_msg         VARCHAR2 (1000) := NULL;
+      v_proc_name     VARCHAR2 (30) := 'Invalid_claim_type';
+
+   BEGIN
+
+      loghelper.info_log( 'Start invalid claim type process ', v_proc_name);
+
+       ---Base bill_type table creation for 2011 - 2014
+
+       BEGIN
+
+         EXECUTE IMMEDIATE 'truncate table rv_commercial.BILL_TYPES';
+
+       EXCEPTION
+         WHEN OTHERS THEN
+            NULL;
+
+
+        END;
+
+       ---Inserting the records
+
+           INSERT INTO BILL_TYPES VALUES(2011,'11','');
+            INSERT INTO BILL_TYPES VALUES(2012,'11','');
+            INSERT INTO BILL_TYPES VALUES(2011,'12','');
+            INSERT INTO BILL_TYPES VALUES(2012,'12','');
+            INSERT INTO BILL_TYPES VALUES(2011,'110','I');
+            INSERT INTO BILL_TYPES VALUES(2014,'111','I');
+            INSERT INTO BILL_TYPES VALUES(2013,'111','I');
+            INSERT INTO BILL_TYPES VALUES(2012,'111','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'111','I');
+            INSERT INTO BILL_TYPES VALUES(2014,'112','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'112','I');
+            INSERT INTO BILL_TYPES VALUES(2012,'112','I');
+            INSERT INTO BILL_TYPES VALUES(2013,'112','I');
+            INSERT INTO BILL_TYPES VALUES(2014,'113','I');
+            INSERT INTO BILL_TYPES VALUES(2012,'113','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'113','I');
+            INSERT INTO BILL_TYPES VALUES(2013,'113','I');
+            INSERT INTO BILL_TYPES VALUES(2014,'114','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'114','I');
+            INSERT INTO BILL_TYPES VALUES(2012,'114','I');
+            INSERT INTO BILL_TYPES VALUES(2013,'114','I');
+            INSERT INTO BILL_TYPES VALUES(2014,'115','I');
+            INSERT INTO BILL_TYPES VALUES(2013,'115','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'115','I');
+            INSERT INTO BILL_TYPES VALUES(2012,'115','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'116','');
+            INSERT INTO BILL_TYPES VALUES(2014,'117','I');
+            INSERT INTO BILL_TYPES VALUES(2013,'117','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'117','I');
+            INSERT INTO BILL_TYPES VALUES(2012,'117','I');
+            INSERT INTO BILL_TYPES VALUES(2014,'118','I');
+            INSERT INTO BILL_TYPES VALUES(2012,'118','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'118','I');
+            INSERT INTO BILL_TYPES VALUES(2013,'118','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'119','I');
+            INSERT INTO BILL_TYPES VALUES(2012,'121','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'121','I');
+            INSERT INTO BILL_TYPES VALUES(2014,'131','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'131','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'131','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'131','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'140','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'140','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'140','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'140','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'141','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'141','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'141','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'141','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'142','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'143','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'144','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'144','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'145','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'145','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'145','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'145','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'146','');
+            INSERT INTO BILL_TYPES VALUES(2012,'146','');
+            INSERT INTO BILL_TYPES VALUES(2012,'147','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'147','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'147','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'147','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'148','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'151','');
+            INSERT INTO BILL_TYPES VALUES(2011,'171','');
+            INSERT INTO BILL_TYPES VALUES(2014,'181','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'181','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'181','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'181','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'182','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'184','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'185','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'211','I');
+            INSERT INTO BILL_TYPES VALUES(2014,'211','I');
+            INSERT INTO BILL_TYPES VALUES(2013,'211','I');
+            INSERT INTO BILL_TYPES VALUES(2012,'211','I');
+            INSERT INTO BILL_TYPES VALUES(2014,'212','I');
+            INSERT INTO BILL_TYPES VALUES(2013,'212','I');
+            INSERT INTO BILL_TYPES VALUES(2012,'212','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'212','I');
+            INSERT INTO BILL_TYPES VALUES(2014,'213','I');
+            INSERT INTO BILL_TYPES VALUES(2013,'213','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'213','I');
+            INSERT INTO BILL_TYPES VALUES(2012,'213','I');
+            INSERT INTO BILL_TYPES VALUES(2014,'214','I');
+            INSERT INTO BILL_TYPES VALUES(2013,'214','I');
+            INSERT INTO BILL_TYPES VALUES(2012,'214','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'214','I');
+            INSERT INTO BILL_TYPES VALUES(2013,'217','I');
+            INSERT INTO BILL_TYPES VALUES(2014,'217','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'217','I');
+            INSERT INTO BILL_TYPES VALUES(2012,'217','I');
+            INSERT INTO BILL_TYPES VALUES(2013,'221','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'221','I');
+            INSERT INTO BILL_TYPES VALUES(2013,'222','I');
+            INSERT INTO BILL_TYPES VALUES(2012,'222','I');
+            INSERT INTO BILL_TYPES VALUES(2014,'222','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'222','I');
+            INSERT INTO BILL_TYPES VALUES(2013,'223','I');
+            INSERT INTO BILL_TYPES VALUES(2012,'223','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'223','I');
+            INSERT INTO BILL_TYPES VALUES(2012,'224','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'227','I');
+            INSERT INTO BILL_TYPES VALUES(2013,'231','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'231','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'231','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'231','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'275','');
+            INSERT INTO BILL_TYPES VALUES(2012,'321','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'321','I');
+            INSERT INTO BILL_TYPES VALUES(2013,'321','I');
+            INSERT INTO BILL_TYPES VALUES(2014,'321','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'322','I');
+            INSERT INTO BILL_TYPES VALUES(2012,'322','I');
+            INSERT INTO BILL_TYPES VALUES(2013,'322','I');
+            INSERT INTO BILL_TYPES VALUES(2014,'322','I');
+            INSERT INTO BILL_TYPES VALUES(2013,'323','I');
+            INSERT INTO BILL_TYPES VALUES(2014,'323','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'324','I');
+            INSERT INTO BILL_TYPES VALUES(2012,'324','I');
+            INSERT INTO BILL_TYPES VALUES(2013,'324','I');
+            INSERT INTO BILL_TYPES VALUES(2014,'324','I');
+            INSERT INTO BILL_TYPES VALUES(2012,'327','I');
+            INSERT INTO BILL_TYPES VALUES(2013,'327','I');
+            INSERT INTO BILL_TYPES VALUES(2014,'327','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'329','I');
+            INSERT INTO BILL_TYPES VALUES(2012,'329','I');
+            INSERT INTO BILL_TYPES VALUES(2013,'329','I');
+            INSERT INTO BILL_TYPES VALUES(2014,'329','I');
+            INSERT INTO BILL_TYPES VALUES(2014,'331','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'331','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'331','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'331','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'341','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'341','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'341','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'341','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'342','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'343','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'343','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'344','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'411','I');
+            INSERT INTO BILL_TYPES VALUES(2013,'461','');
+            INSERT INTO BILL_TYPES VALUES(2013,'464','');
+            INSERT INTO BILL_TYPES VALUES(2013,'491','');
+            INSERT INTO BILL_TYPES VALUES(2012,'491','');
+            INSERT INTO BILL_TYPES VALUES(2011,'581','');
+            INSERT INTO BILL_TYPES VALUES(2013,'711','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'711','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'711','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'712','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'721','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'721','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'721','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'721','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'722','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'722','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'722','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'723','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'723','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'723','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'723','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'724','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'727','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'727','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'727','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'727','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'731','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'731','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'731','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'731','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'741','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'741','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'741','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'741','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'742','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'742','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'742','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'743','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'743','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'743','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'751','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'751','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'751','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'751','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'755','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'757','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'761','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'761','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'761','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'761','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'763','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'767','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'767','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'767','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'767','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'768','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'768','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'768','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'768','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'771','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'771','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'771','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'771','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'777','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'778','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'781','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'791','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'791','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'791','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'797','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'799','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'811','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'811','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'811','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'811','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'812','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'812','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'812','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'812','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'813','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'813','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'813','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'813','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'814','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'814','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'814','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'814','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'817','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'817','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'821','I');
+            INSERT INTO BILL_TYPES VALUES(2013,'821','I');
+            INSERT INTO BILL_TYPES VALUES(2014,'821','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'821','I');
+            INSERT INTO BILL_TYPES VALUES(2012,'822','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'822','I');
+            INSERT INTO BILL_TYPES VALUES(2013,'823','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'823','I');
+            INSERT INTO BILL_TYPES VALUES(2013,'824','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'824','I');
+            INSERT INTO BILL_TYPES VALUES(2014,'831','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'831','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'831','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'831','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'851','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'851','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'851','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'851','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'852','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'852','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'853','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'854','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'854','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'855','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'857','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'857','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'857','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'857','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'858','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'861','I');
+            INSERT INTO BILL_TYPES VALUES(2013,'861','I');
+            INSERT INTO BILL_TYPES VALUES(2012,'861','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'861','I');
+            INSERT INTO BILL_TYPES VALUES(2012,'862','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'862','I');
+            INSERT INTO BILL_TYPES VALUES(2012,'863','I');
+            INSERT INTO BILL_TYPES VALUES(2011,'863','I');
+            INSERT INTO BILL_TYPES VALUES(2012,'871','');
+            INSERT INTO BILL_TYPES VALUES(2013,'891','O');
+            INSERT INTO BILL_TYPES VALUES(2014,'891','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'891','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'891','O');
+            INSERT INTO BILL_TYPES VALUES(2013,'893','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'893','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'897','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'897','O');
+            INSERT INTO BILL_TYPES VALUES(2012,'898','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'898','O');
+            INSERT INTO BILL_TYPES VALUES(2011,'999','');
+            INSERT INTO BILL_TYPES VALUES(2013,'11A','');
+            INSERT INTO BILL_TYPES VALUES(2011,'32X','');
+            INSERT INTO BILL_TYPES VALUES(2014,'','P');
+            INSERT INTO BILL_TYPES VALUES(2013,'','P');
+            INSERT INTO BILL_TYPES VALUES(2012,'','P');
+            INSERT INTO BILL_TYPES VALUES(2011,'','P');
+
+         -----Inserting in the members_excluded
+
+     INSERT INTO RV_COMMERCIAL.MEMBERS_EXCLUDED (AS_OF_DATE,
+                                               RECIPIENT_NBR,
+                                               REASON_FOR_EXCLUSION,
+                                              MEMBER_DETAIL_1)
+      (SELECT DISTINCT (select as_of_month from RV_COMMERCIAL.MONTHLY_UPLOAD_PARAMS),
+                       claim_number,
+                       'invalid claim_type',
+                       'Updated to value on bill_types table'
+         FROM rv_commercial.claims_stage
+         where (claim_type != 'I' and claim_type != 'P' and claim_type != 'O') or (claim_type is null));
+
+
+       ----Updating claims tables based on bill_type information
+       ---- UPDATE rv_commercial.CLAIMS_STAGE 1
+        UPDATE rv_commercial.CLAIMS_STAGE
+           SET claim_type =
+                  (SELECT bill_type_code
+                     FROM rv_commercial.BILL_TYPES
+                    WHERE     rv_commercial.CLAIMS_STAGE.bill_type = bill_types.bill_type
+                          AND EXTRACT ( YEAR FROM TO_DATE ( thru_dos, 'YYYYMMDD')) =
+                                 bill_types.benefit_year)
+         where (claim_type != 'I' and claim_type != 'P' and claim_type != 'O') or (claim_type is null);
+
+       ----UPDATE rv_commercial.CLAIMS_STAGE 2
+             UPDATE rv_commercial.CLAIMS_STAGE
+               SET claim_type =
+                      (SELECT bill_type_code
+                         FROM rv_commercial.BILL_TYPES
+                        WHERE     rv_commercial.CLAIMS_STAGE.bill_type = bill_types.bill_type
+                          AND bill_types.benefit_year =
+                              (select max(bill_types.benefit_year) from rv_commercial.BILL_TYPES where bill_types.bill_type = rv_commercial.CLAIMS_STAGE.bill_type)
+                              )where (claim_type != 'I' and claim_type != 'P' and claim_type != 'O') or (claim_type is null);
+
+            ----UPDATE rv_commercial.CLAIMS_STAGE 3
+            UPDATE CLAIMS_STAGE
+               SET claim_type = 'I'
+             WHERE claim_type IS NULL;
+
+    commit;
+
+     loghelper.info_log ( 'End invalid claim type process ', v_proc_name);
+
+      COMMIT;
+   EXCEPTION
+    WHEN OTHERS THEN
+       err_msg :=
+               'Unhandled exception while running the Invalid Claim Type...  '
+            || SQLCODE
+            || ': '
+            || SQLERRM;
+
+         loghelper.error_log (err_msg, v_proc_name);
+
+         raise_application_error (
+            pkg_rap_commercial.general_app_error_errcode, err_msg);
+
+
+
+
+ END  Invalid_claim_type;
+
+
+
+   PROCEDURE Invalid_cost_sharing_indicator  is
+      v_msg                     VARCHAR2 (2000) := NULL;
+      v_proc_name               VARCHAR2 (30) := 'Invalid_cost_sharing_indicator';
+      v_scoring_version_code    varchar2(25);
+      err_msg                   VARCHAR2 (2000) := NULL;
+
+    BEGIN
+      loghelper.info_log ( 'Start Invalid cost sharing indicator process ', v_proc_name);
+
+     ----select the scoring version from upload params table.
+      Begin
+      select scoring_version_code
+        into v_scoring_version_code
+       from rv_commercial.monthly_upload_params;
+
+        if  v_scoring_version_code is null then
+         err_msg := 'Scoring version code is null. Please, verify rv_commercial.monthly_upload_params table';
+         loghelper.error_log (err_msg, v_proc_name);
+         RETURN;
+        end if;
+
+
+       EXCEPTION
+         WHEN OTHERS THEN
+         null;
+
+      end;
+
+     ---INSERTINGIN THE EXCLUDED MEMBERS TABLE.
+       INSERT INTO RV_COMMERCIAL.MEMBERS_EXCLUDED (AS_OF_DATE,
+                                                 RECIPIENT_NBR,
+                                                 REASON_FOR_EXCLUSION,
+                                                 MEMBER_DETAIL_1,
+                                                 MEMBER_DETAIL_2)
+       (SELECT DISTINCT (select as_of_month from RV_COMMERCIAL.MONTHLY_UPLOAD_PARAMS),
+                         recipient_nbr,
+                         'Invalid Cost sharing indicator',
+                         'Update this records to 0',
+                         'Previusly the value was "N"'
+      FROM rv_commercial.members_staging stg
+               WHERE TRIM (stg.cost_sharing_indicator) NOT IN
+                   (SELECT to_char(csi_level)
+                      FROM rv_commercial.COST_SHARING_INDICATOR
+                     WHERE scoring_version_code = v_scoring_version_code));
+
+ ------update the records to 0 where is 'N'.
+    update rv_commercial.members_staging stg
+    set stg.cost_sharing_indicator = '0'
+    where TRIM (stg.cost_sharing_indicator) = 'N';
+
+     loghelper.info_log ( 'End Invalid cost sharing indicator process ', v_proc_name);
+
+      COMMIT;
+
+   EXCEPTION
+    WHEN OTHERS THEN
+       err_msg :=
+               'Unhandled exception while running the Invalid Cost Sharing indicator error...  '
+            || SQLCODE
+            || ': '
+            || SQLERRM;
+
+         loghelper.error_log (err_msg, v_proc_name);
+
+         raise_application_error (
+            pkg_rap_commercial.general_app_error_errcode, err_msg);
+
+      END Invalid_cost_sharing_indicator;
+
+END PKG_RVC_ERRORS_CORRECTIONS;
+/
