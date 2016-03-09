@@ -1,5 +1,6 @@
 CREATE OR REPLACE PACKAGE RV_COMMERCIAL.PKG_RVC_ERRORS_CORRECTIONS AS
 /******************************************************************************
+-----
    NAME:       PKG_RVC_ERRORS_CORRECTIONS
    PURPOSE:
 
